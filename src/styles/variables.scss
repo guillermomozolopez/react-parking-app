@@ -35,22 +35,22 @@ $dark:          $gray-900;
 $bg-color1:     $gray-800;
 $bg-color2:     $gray-600;
 
-$font-color-1:  white;
-$font-color-2:  #a9afb2;
+$font-color-1:  $white;
+$font-color-2:  $gray-300;
 
-$border-color:  #343A46;
+$border-color:  $green;
 
-$error-color:   #F56565;
+$error-color:   $red;
 
-$spacer:          4px;
-$space-xs:        $spacer;
-$space-sm:        $spacer * 2;
-$space-md:        $spacer * 3;
-$space-lg:        $spacer * 4;
-$space-xl:        $spacer * 5;
+$spacer:        4px;
+$space-xs:      $spacer;
+$space-sm:      $spacer * 2;
+$space-md:      $spacer * 3;
+$space-lg:      $spacer * 4;
+$space-xl:      $spacer * 5;
 
-$radius-1:        2px;
-$radius-2:        4px;
-$radius-3:        6px;
-$radius-4:        8px;
-$radius-5:        10px;
+$radius-1:      2px;
+$radius-2:      4px;
+$radius-3:      6px;
+$radius-4:      8px;
+$radius-5:      10px;
