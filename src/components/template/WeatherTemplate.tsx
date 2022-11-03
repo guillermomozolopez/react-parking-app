@@ -5,13 +5,12 @@ import CurrentWeather from '../UI/molecules/CurrentWeather/CurrentWeather';
 import {
   TiWeatherSunny,
   TiWeatherShower,
-  TiWeatherSnow,
-  TiWeatherWindyCloudy,
-  TiWeatherCloudy,
   TiWeatherDownpour,
   TiWeatherStormy
 } from 'react-icons/ti';
 import { TbCloudFog, TbCloudSnow, TbSnowflake, TbGrain } from 'react-icons/tb';
+import { Geolocation } from '../../App';
+import WeatherEightDays from '../UI/molecules/WeatherEightDays/WeatherEightDays';
 
 export interface Weather {
   precipitation_sum: number[];
@@ -62,8 +61,9 @@ export const weatherCodes: any = {
   99: { name: 'Tormenta intensa', icon: <TiWeatherStormy /> }
 };
 
-function WeatherPage() {
-  const [weather, setWeather] = useState<Weather>();
+function WeatherPage({ currentGeolocation }: { currentGeolocation: Geolocation | null }) {
+  const [weather, setWeather] = useState<Weather | undefined>();
+  const [city, setCity] = useState<string | null>(null);
   const [currentWeather, setCurrentWeather] = useState<ICurrentWeather>({
     precipitation_sum: 0,
     sunrise: '',
@@ -71,45 +71,57 @@ function WeatherPage() {
     temperature_2m_max: '',
     temperature_2m_min: '',
     time: '',
-    weathercode: 0
+    weathercode: 100
   });
   useEffect(() => {
     const dayStart = dayjs().format('YYYY-MM-DD');
     const dayEnd = dayjs().add(7, 'day').format('YYYY-MM-DD');
-    axios
-      .get(
-        `https://api.open-meteo.com/v1/forecast?latitude=40.4167&longitude=-3.7033&daily=weathercode,temperature_2m_max,temperature_2m_min,sunrise,sunset,precipitation_sum&timezone=Europe%2FBerlin&start_date=${dayStart}&end_date=${dayEnd}`
-      )
-      .then((response: { data: { daily: Weather } }) => {
-        const apiResponse = response.data.daily;
-        setWeather(apiResponse);
-        setCurrentWeather({
-          precipitation_sum: apiResponse.precipitation_sum[0],
-          sunrise: apiResponse.sunrise[0],
-          sunset: apiResponse.sunset[0],
-          temperature_2m_max: apiResponse.temperature_2m_max[0],
-          temperature_2m_min: apiResponse.temperature_2m_min[0],
-          time: apiResponse.time[0],
-          weathercode: apiResponse.weathercode[0]
+    if (currentGeolocation?.latitude && currentGeolocation?.longitude) {
+      axios
+        .get(
+          `https://api.opencagedata.com/geocode/v1/json?q=${currentGeolocation?.latitude},${currentGeolocation?.longitude}&key=0935f804669b4d229263f2a3d5aaf3e2&language=es&pretty=1`
+        )
+        .then((response: any) => {
+          setCity(response.data.results[0].components.state_district);
+        })
+        .catch((error: any) => {
+          console.log(error);
         });
 
-        console.log({
-          precipitation_sum: apiResponse.precipitation_sum[0],
-          sunrise: apiResponse.sunrise[0],
-          sunset: apiResponse.sunset[0],
-          temperature_2m_max: apiResponse.temperature_2m_max[0],
-          temperature_2m_min: apiResponse.temperature_2m_min[0],
-          time: apiResponse.time[0],
-          weathercode: apiResponse.weathercode[0]
+      axios
+        .get(
+          `https://api.open-meteo.com/v1/forecast?latitude=${currentGeolocation?.latitude}&longitude=${currentGeolocation?.longitude}&daily=weathercode,temperature_2m_max,temperature_2m_min,sunrise,sunset,precipitation_sum&timezone=Europe%2FBerlin&start_date=${dayStart}&end_date=${dayEnd}`
+        )
+        .then((response: { data: { daily: Weather } }) => {
+          const apiResponse: Weather = response.data.daily;
+          setWeather(() => ({
+            precipitation_sum: apiResponse.precipitation_sum.slice(1),
+            sunrise: apiResponse.sunrise.slice(1),
+            sunset: apiResponse.sunset.slice(1),
+            temperature_2m_max: apiResponse.temperature_2m_max.slice(1),
+            temperature_2m_min: apiResponse.temperature_2m_min.slice(1),
+            time: apiResponse.time.slice(1),
+            weathercode: apiResponse.weathercode.slice(1)
+          }));
+          setCurrentWeather({
+            precipitation_sum: apiResponse.precipitation_sum[0],
+            sunrise: apiResponse.sunrise[0],
+            sunset: apiResponse.sunset[0],
+            temperature_2m_max: apiResponse.temperature_2m_max[0],
+            temperature_2m_min: apiResponse.temperature_2m_min[0],
+            time: apiResponse.time[0],
+            weathercode: apiResponse.weathercode[0]
+          });
+        })
+        .catch((error: any) => {
+          console.log(error);
         });
-      })
-      .catch((error: any) => {
-        console.log(error);
-      });
-  }, []);
+    }
+  }, [currentGeolocation]);
   return (
     <div>
-      <CurrentWeather currentWeather={currentWeather} />
+      <CurrentWeather currentWeather={currentWeather} city={city} />
+      <WeatherEightDays weather={weather} />
     </div>
   );
 }

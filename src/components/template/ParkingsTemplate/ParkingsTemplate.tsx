@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import ParkingCard from '../../UI/organisms/ParkingCard/ParkingCard';
 import API_GetParkings from '../../../service/API_GetParkings';
 import { RingLoader } from 'react-spinners';
+import { Geolocation } from '../../../App';
 import './styles.scss';
 
 export interface Parking {
@@ -40,7 +41,7 @@ interface Location {
   distanceToGeolocation?: number;
 }
 
-function ParkingsTemplate() {
+function ParkingsTemplate({ currentGeolocation }: { currentGeolocation: Geolocation | null }) {
   const [parkings, setParkings] = useState<Parking[] | []>([]);
 
   useEffect(() => {

@@ -5,16 +5,44 @@ import WeatherTemplate from './components/template/WeatherTemplate';
 import Header from './components/UI/organisms/Header/Header';
 import Layout from './components/template/Layout';
 import './styles/App.scss';
+import { useState, useEffect } from 'react';
+
+export interface Geolocation {
+  latitude: number;
+  longitude: number;
+}
 
 function App() {
+  const [currentGeolocation, setCurrentGeolocation] = useState<Geolocation | null>(null);
+
+  useEffect(() => {
+    if ('geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        setCurrentGeolocation({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude
+        });
+      });
+    }
+  }, [navigator]);
+
   return (
     <BrowserRouter>
       <Header />
       <Layout>
         <Routes>
-          <Route path="/weather" element={<WeatherTemplate />} />
-          <Route path="/parking" element={<ParkingsTemplate />} />
-          <Route path="/parkingsmap" element={<ParkingMapTemplate />} />
+          <Route
+            path="/weather"
+            element={<WeatherTemplate currentGeolocation={currentGeolocation} />}
+          />
+          <Route
+            path="/parking"
+            element={<ParkingsTemplate currentGeolocation={currentGeolocation} />}
+          />
+          <Route
+            path="/parkings-map"
+            element={<ParkingMapTemplate currentGeolocation={currentGeolocation} />}
+          />
         </Routes>
       </Layout>
     </BrowserRouter>

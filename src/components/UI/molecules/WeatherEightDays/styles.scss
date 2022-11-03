@@ -1,0 +1,7 @@
+@import '../../../../styles/variables.scss';
+
+.row-weather-day{
+  display: grid;
+  gap: 30px;
+  grid-template-columns: repeat(7, 1fr);
+}
