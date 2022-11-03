@@ -1,0 +1,9 @@
+@import '../../../../styles/variables.scss';
+
+.parking-card {
+  border: $border-1;
+  border-color: $border-color;
+  background-color: $bg-color2;
+  padding: $space-lg;
+  border-radius: $radius-5;
+}

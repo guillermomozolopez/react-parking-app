@@ -1,0 +1,18 @@
+@import '../../../../styles/variables.scss';
+
+.current-weather {
+  &-container {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    font-size: 30px;
+    text-align: center;
+    column-gap: 30px;
+  }
+}

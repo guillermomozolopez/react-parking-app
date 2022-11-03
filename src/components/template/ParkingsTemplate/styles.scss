@@ -1,0 +1,8 @@
+@import '../../../styles/variables.scss';
+
+.content {
+  margin: $space-sm;
+  display: grid;
+  gap: $space-lg;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
