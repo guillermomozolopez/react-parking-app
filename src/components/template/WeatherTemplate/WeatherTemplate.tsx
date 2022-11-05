@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import dayjs from 'dayjs';
-import CurrentWeather from '../UI/molecules/CurrentWeather/CurrentWeather';
+import CurrentWeather from '../../UI/molecules/CurrentWeather/CurrentWeather';
 import {
   TiWeatherSunny,
   TiWeatherShower,
@@ -9,8 +9,9 @@ import {
   TiWeatherStormy
 } from 'react-icons/ti';
 import { TbCloudFog, TbCloudSnow, TbSnowflake, TbGrain } from 'react-icons/tb';
-import { Geolocation } from '../../App';
-import WeatherEightDays from '../UI/molecules/WeatherEightDays/WeatherEightDays';
+import { Geolocation } from '../../../App';
+import WeatherSixDays from '../../UI/molecules/WeatherSixDays/WeatherSixDays';
+import './styles.scss';
 
 export interface Weather {
   precipitation_sum: number[];
@@ -37,6 +38,7 @@ export const weatherCodes: any = {
   0: { name: 'Cielo despejado', icon: <TiWeatherSunny /> },
   1: { name: 'Parcialmente nublado', icon: <TiWeatherShower /> },
   2: { name: 'Parcialmente nublado', icon: <TiWeatherShower /> },
+  3: { name: 'Parcialmente nublado', icon: <TiWeatherShower /> },
   45: { name: 'Niebla con escarcha', icon: <TbCloudFog /> },
   48: { name: 'Niebla con escarcha', icon: <TbCloudFog /> },
   51: { name: 'Llovizna', icon: <TiWeatherShower /> },
@@ -119,9 +121,9 @@ function WeatherPage({ currentGeolocation }: { currentGeolocation: Geolocation |
     }
   }, [currentGeolocation]);
   return (
-    <div>
+    <div className="container-weather-template">
       <CurrentWeather currentWeather={currentWeather} city={city} />
-      <WeatherEightDays weather={weather} />
+      <WeatherSixDays weather={weather} />
     </div>
   );
 }

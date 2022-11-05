@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import ParkingMapTemplate from './components/template/ParkingMapTemplate';
+import ParkingMapTemplate from './components/template/ParkingMapTemplate/ParkingMapTemplate';
 import ParkingsTemplate from './components/template/ParkingsTemplate/ParkingsTemplate';
-import WeatherTemplate from './components/template/WeatherTemplate';
+import WeatherTemplate from './components/template/WeatherTemplate/WeatherTemplate';
 import Header from './components/UI/organisms/Header/Header';
 import Layout from './components/template/Layout';
 import './styles/App.scss';
@@ -35,14 +35,8 @@ function App() {
             path="/weather"
             element={<WeatherTemplate currentGeolocation={currentGeolocation} />}
           />
-          <Route
-            path="/parking"
-            element={<ParkingsTemplate currentGeolocation={currentGeolocation} />}
-          />
-          <Route
-            path="/parkings-map"
-            element={<ParkingMapTemplate currentGeolocation={currentGeolocation} />}
-          />
+          <Route path="/parking" element={<ParkingsTemplate />} />
+          <Route path="/parkings-map" element={<ParkingMapTemplate />} />
         </Routes>
       </Layout>
     </BrowserRouter>

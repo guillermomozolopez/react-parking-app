@@ -4,6 +4,7 @@ import API_GetParkings from '../../../service/API_GetParkings';
 import { RingLoader } from 'react-spinners';
 import { Geolocation } from '../../../App';
 import './styles.scss';
+import useParkings from '../../../hooks/useParkings';
 
 export interface Parking {
   '@id': string;
@@ -41,14 +42,8 @@ interface Location {
   distanceToGeolocation?: number;
 }
 
-function ParkingsTemplate({ currentGeolocation }: { currentGeolocation: Geolocation | null }) {
-  const [parkings, setParkings] = useState<Parking[] | []>([]);
-
-  useEffect(() => {
-    API_GetParkings().then((data) => {
-      setParkings(data['@graph']);
-    });
-  }, []);
+function ParkingsTemplate() {
+  const parkings = useParkings();
 
   return (
     <div className="content">

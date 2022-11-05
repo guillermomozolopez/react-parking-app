@@ -1,4 +1,4 @@
-import { ICurrentWeather, weatherCodes } from '../../../template/WeatherTemplate';
+import { ICurrentWeather, weatherCodes } from '../../../template/WeatherTemplate/WeatherTemplate';
 import { TbTemperatureMinus, TbTemperaturePlus, TbSunset, TbSunrise } from 'react-icons/tb';
 import dayjs from 'dayjs';
 import { RingLoader } from 'react-spinners';
