@@ -1,56 +1,29 @@
-import { useState, useEffect } from 'react';
 import ParkingCard from '../../UI/organisms/ParkingCard/ParkingCard';
-import API_GetParkings from '../../../service/API_GetParkings';
 import { RingLoader } from 'react-spinners';
-import { Geolocation } from '../../../App';
 import './styles.scss';
-import useParkings from '../../../hooks/useParkings';
+import { Parking } from '../../../App';
+import { useState, useEffect } from 'react';
+import ButtonSortBy from '../../UI/atoms/ButtonSortBy/ButtonSortBy';
 
-export interface Parking {
-  '@id': string;
-  title: string;
-  relation: string;
-  address: Address;
-  location: Location;
-  organization: Organization;
-}
+function ParkingsTemplate({ parkings }: { parkings: Parking[] | [] }) {
+  const [sortedParkings, setSortedParkings] = useState<Parking[] | []>(parkings);
+  useEffect(() => {
+    setSortedParkings(parkings);
+  }, [parkings]);
 
-interface Address {
-  district: District;
-  area: District;
-  locality: string;
-  'postal-code': string;
-  'street-address': string;
-}
-
-interface District {
-  '@id': string;
-}
-
-interface Organization {
-  organizationDesc: string;
-  accesibility: string;
-  schedule: string;
-  services: string;
-  organizationName: string;
-}
-
-interface Location {
-  latitude: number;
-  longitude: number;
-  // distancia entre el parking y mi ubicación actual
-  distanceToGeolocation?: number;
-}
-
-function ParkingsTemplate() {
-  const parkings = useParkings();
+  useEffect(() => {
+    console.log(sortedParkings[0]);
+  }, [sortedParkings]);
 
   return (
-    <div className="content">
-      <RingLoader color="#36d7b7" loading={parkings.length === 0} />
-      {parkings.map((parking, index) => (
-        <ParkingCard key={index} parking={parking} />
-      ))}
+    <div>
+      <ButtonSortBy sortedParkings={sortedParkings} setSortedParkings={setSortedParkings} />
+      <div className="content">
+        <RingLoader color="#36d7b7" loading={parkings.length === 0} />
+        {sortedParkings.map((parking, index) => (
+          <ParkingCard key={index} parking={parking} />
+        ))}
+      </div>
     </div>
   );
 }

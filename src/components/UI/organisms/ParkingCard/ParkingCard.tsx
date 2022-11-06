@@ -1,4 +1,4 @@
-import { Parking } from '../../../template/ParkingsTemplate/ParkingsTemplate';
+import { Parking } from '../../../../App';
 import './styles.scss';
 
 function ParkingCard({ parking }: { parking: Parking }) {

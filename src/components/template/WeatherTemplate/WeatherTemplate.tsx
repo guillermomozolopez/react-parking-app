@@ -9,7 +9,7 @@ import {
   TiWeatherStormy
 } from 'react-icons/ti';
 import { TbCloudFog, TbCloudSnow, TbSnowflake, TbGrain } from 'react-icons/tb';
-import { Geolocation } from '../../../App';
+import { Geolocation, Parking } from '../../../App';
 import WeatherSixDays from '../../UI/molecules/WeatherSixDays/WeatherSixDays';
 import './styles.scss';
 

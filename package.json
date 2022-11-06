@@ -29,8 +29,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "cors-anywhere": "node ./src/cors-anywhere-server.js",
-    "dev": "concurrently \"npm run cors-anywhere\" \"npm run start\"",
+    "allow-cors": "node ./src/allow-cors-server.js",
+    "servers": "concurrently \"npm run allow-cors\" \"npm run start\"",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
