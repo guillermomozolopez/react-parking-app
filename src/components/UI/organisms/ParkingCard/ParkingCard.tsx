@@ -6,8 +6,11 @@ function ParkingCard({ parking }: { parking: Parking }) {
     <div className="parking-card">
       <div>{parking.title}</div>
       <div>
-        {parking.address['street-address']}, {parking.address['postal-code']},{' '}
-        {parking.address.locality}
+        <p>
+          {parking.address['street-address']}, {parking.address['postal-code']},{' '}
+        </p>
+        <p>{parking.address.locality}</p>
+        <p>{parking.distance}</p>
       </div>
     </div>
   );

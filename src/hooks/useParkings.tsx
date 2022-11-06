@@ -15,8 +15,8 @@ function useParkings({
         setParkings(
           data['@graph']
             .map((parking: Parking) => {
-              const R = 6371e3; // metres
-              const φ1 = (parking.location.latitude * Math.PI) / 180; // φ, λ in radians
+              const R = 6371e3; // metros
+              const φ1 = (parking.location.latitude * Math.PI) / 180; // φ, λ in redianes
               const φ2 = (currentGeolocation?.latitude * Math.PI) / 180;
               const Δφ =
                 ((currentGeolocation?.latitude - parking.location.latitude) * Math.PI) / 180;
@@ -28,7 +28,7 @@ function useParkings({
                 Math.cos(φ1) * Math.cos(φ2) * Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
               const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
-              const d = R * c; // in metres
+              const d = (R * c) / 1000; // en kilometros
               return { ...parking, distance: d };
             })
             .sort((p1: Parking, p2: Parking) => p1.title.localeCompare(p2.title))
