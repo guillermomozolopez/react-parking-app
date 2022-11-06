@@ -5,19 +5,13 @@ const URL = transformURLProxy(
 );
 async function getParkings() {
   try {
-    const response = await fetch(URL, {
-      method: 'GET',
-      mode: 'cors',
-      cache: 'no-cache',
-      credentials: 'same-origin',
-      redirect: 'follow',
-      referrerPolicy: 'no-referrer',
-      headers: {}
-    });
-    const responseString = await response.text();
-    const withoutMinusErrors = responseString.replaceAll('--', '-');
-    const parkingApiData = JSON.parse(withoutMinusErrors);
-    return parkingApiData;
+    // no hace falta el segundo param
+    const res = await fetch(URL);
+    // transformo a texto y luego le cambio el simbolo
+    const replaceFloatMinus = await res.text().replaceAll('--', '-');
+    // transformo a json
+    const solvedParkings = JSON.parse(replaceFloatMinus);
+    return solvedParkings;
   } catch (error) {
     return error;
   }
