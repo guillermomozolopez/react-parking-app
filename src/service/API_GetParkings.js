@@ -7,9 +7,10 @@ async function getParkings() {
   try {
     // no hace falta el segundo param
     const res = await fetch(URL);
-    // transformo a texto y luego le cambio el simbolo
-    const replaceFloatMinus = await res.text().replaceAll('--', '-');
-    // transformo a json
+    // transformo a texto para poder hacer un replace de los --
+    const resCastToString = await res.text();
+    const replaceFloatMinus = resCastToString.replace('--', '-');
+    // lo vuelvo a porner a json para poder manejarlo
     const solvedParkings = JSON.parse(replaceFloatMinus);
     return solvedParkings;
   } catch (error) {
