@@ -7,17 +7,30 @@ import ButtonSortBy from '../../UI/atoms/ButtonSortBy/ButtonSortBy';
 
 function ParkingsTemplate({ parkings }: { parkings: Parking[] | [] }) {
   const [sortedParkings, setSortedParkings] = useState<Parking[] | []>(parkings);
+  const [sortByDistance, setSortByDistance] = useState<boolean>(false);
+
   useEffect(() => {
     setSortedParkings(parkings);
   }, [parkings]);
 
-  useEffect(() => {
-    console.log(sortedParkings[0]);
-  }, [sortedParkings]);
+  const handleClick = () => {
+    console.log(sortByDistance);
+    if (!sortByDistance) {
+      console.log(sortedParkings.sort((p1: Parking, p2: Parking) => p2.distance - p1.distance));
+      setSortedParkings(
+        sortedParkings.sort((p1: Parking, p2: Parking) => p2.distance - p1.distance)
+      );
+    } else {
+      setSortedParkings(
+        sortedParkings.sort((p1: Parking, p2: Parking) => p1.title.localeCompare(p2.title))
+      );
+    }
+    setSortByDistance(!sortByDistance);
+  };
 
   return (
     <div>
-      <ButtonSortBy sortedParkings={sortedParkings} setSortedParkings={setSortedParkings} />
+      <ButtonSortBy handleClick={handleClick} sortByDistance={sortByDistance} />
       <div className="content">
         <RingLoader color="#36d7b7" loading={parkings.length === 0} />
         {sortedParkings.map((parking, index) => (
