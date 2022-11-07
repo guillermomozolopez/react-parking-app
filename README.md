@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# Iniciar app
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Proyecti creado con [Create React App](https://github.com/facebook/create-react-app).
 
 La app consta de dos partes: un servidor de cors que permite cualquier origen y la app de React
 
