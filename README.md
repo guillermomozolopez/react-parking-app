@@ -2,20 +2,21 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+La app consta de dos partes: un servidor de cors que permite cualquier origen y la app de React
 
-In the project directory, you can run:
+## Scripts a seguir
 
-### `npm start`
+### `npm i`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Instalar los modulos necesarios
 
 ### `npm start`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Nos situamos en react-parking-app/server y ejecutamos el comando mencionado.\
+Correrá en  [http://localhost:4000](http://localhost:4000) .
+
+### `npm start`
+
+Una vez que esté corriendo el servidor.\
+Ejecuta este comando en la raiz (react-parking-app).
 
