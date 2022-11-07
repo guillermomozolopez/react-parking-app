@@ -1,5 +1,4 @@
-import { ReactNode } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import '../../../../styles/styles.scss';
 
 function ButtonPlaceParking({ id }: { id: string }): JSX.Element {

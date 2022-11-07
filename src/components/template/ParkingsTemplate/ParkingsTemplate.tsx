@@ -14,9 +14,7 @@ function ParkingsTemplate({ parkings }: { parkings: Parking[] | [] }) {
   }, [parkings]);
 
   const handleClick = () => {
-    console.log(sortByDistance);
     if (!sortByDistance) {
-      console.log(sortedParkings.sort((p1: Parking, p2: Parking) => p2.distance - p1.distance));
       setSortedParkings(
         sortedParkings.sort((p1: Parking, p2: Parking) => p2.distance - p1.distance)
       );

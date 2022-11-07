@@ -23,8 +23,9 @@ function ParkingCard({ parking }: { parking: Parking }) {
         <p>
           <GiPathDistance />
           <FloatSpan value={parking.distance} decimalScale={2} />
+          km
         </p>
-        <p>
+        <p className="btn-placement">
           <ButtonPlaceParking id={parking.id} />
         </p>
       </div>
