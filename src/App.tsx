@@ -15,6 +15,7 @@ export interface Geolocation {
 
 export interface Parking {
   '@id': string;
+  id: string;
   title: string;
   relation: string;
   address: Address;

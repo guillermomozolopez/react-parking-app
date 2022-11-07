@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Parking } from '../../../../App';
+import '../../../../styles/styles.scss';
+import { BsSortDown } from 'react-icons/bs';
 function ButtonSortBy({
   handleClick,
   sortByDistance
@@ -8,7 +8,8 @@ function ButtonSortBy({
   sortByDistance: boolean;
 }): JSX.Element {
   return (
-    <button onClick={handleClick}>
+    <button className="btn" onClick={handleClick}>
+      <BsSortDown />
       {sortByDistance ? 'Ordenar alfabeticamente' : 'Ordernar por distacia'}
     </button>
   );
